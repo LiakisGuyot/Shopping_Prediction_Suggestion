@@ -7,14 +7,7 @@ modelResult = ["Shorts","Shirt","Socks","Coat","Dress","Boots","Handbag","Sungla
 
 SAVE_FILENAME = "predictionsReview.csv"
 
-if os.path.exists(SAVE_FILENAME):
-    # Si le fichier existe, on le lit et on stocke les données dans une liste
-    with open(SAVE_FILENAME, mode='r', newline='') as file:
-        reader = csv.reader(file, delimiter=';')
-        donneesFile = list(reader)
-else:
-    # Si le fichier n'existe pas, on initialise une liste vide
-    donneesFile = [["Age", "Genre", "Location", "Subscription Status", "Frequency of Purchases", 
+donneesFile = [["Age", "Genre", "Location", "Subscription Status", "Frequency of Purchases", 
                "Season", "Shipping Type", "Discount Applied", "Promo Code Used", "Payment Method",
                "Reco1", "Reco2", "Reco3"]]
 
@@ -95,7 +88,7 @@ def main():
         # Appel de la fonction de prédiction avec les données saisies
         prediction = list(predict({"data": data})["predictions"].values())
         
-        nouvelle_ligne = person
+        nouvelle_ligne = data
         
         st.write("Prédiction obtenue :")
         products = getItemsToRecommend(modelResult, int(id)-1, prediction)
@@ -106,6 +99,8 @@ def main():
         txt = txt[:-2]
         st.write(txt)
         
+        if len(donneesFile) > 1:
+            donneesFile.remove(1)
         donneesFile.append(nouvelle_ligne)
         with open(SAVE_FILENAME, mode='w', newline='') as file:
             writer = csv.writer(file, delimiter=';')

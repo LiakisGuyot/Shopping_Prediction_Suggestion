@@ -81,12 +81,10 @@ async def predictReviewApi(data: dict):
 
     for i, val in enumerate(cols_cat_info):
         x[val] = encoder[i].transform([x[val]])[0]
-    print(x)
     
     predict = pipelineknn.predict([x])
     prediction = {}
     for i, val in enumerate(predict[0]):
         prediction[modelResult[i]] = val
-    print(prediction)
     
     return {"predictions": prediction}
