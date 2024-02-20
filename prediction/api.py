@@ -4,7 +4,9 @@ import os
 from sklearn.preprocessing import LabelEncoder
 from fctUtils import predict, load, dataFromJson
 
+
 MODEL_FILENAME = "../pickles/predictionModelTest.pkl"
+MODEL_FILENAME2 = "../pickles/knn_recommandation.pkl"
 SAVE_FILENAME = "predictions.csv"
 
 ENCODER_FILENAME = "../pickles/label_encoders_info_test.pkl"
@@ -12,6 +14,8 @@ ENCODER_FILENAME = "../pickles/label_encoders_info_test.pkl"
 app = FastAPI()
 pipeline = load(MODEL_FILENAME)
 encoder = load(ENCODER_FILENAME)
+
+pipelineknn = load(MODEL_FILENAME2)
 
 modelResult = ["Shorts","Shirt","Socks","Coat","Dress","Boots","Handbag","Sunglasses","Hat","Belt","Backpack","Scarf","Jacket","Jeans","Gloves","Sneakers","Sweater","Pants","T-shirt","Jewelry","Skirt", "Blouse", "Sandals", "Hoodie","Shoes"]
 cols_cat_info = [1,2,3,4,5,6,7,8,9]
@@ -23,10 +27,11 @@ if os.path.exists(SAVE_FILENAME):
         donnees = list(reader)
 else:
     # Si le fichier n'existe pas, on initialise une liste vide
-    donnees = []
-    
-    
-
+    donnees = [["Age", "Genre", "Location", "Subscription Status", "Frequency of Purchases", 
+               "Season", "Shipping Type", "Discount Applied", "Promo Code Used", "Payment Method",
+               "Shorts","Shirt","Socks","Coat","Dress","Boots","Handbag","Sunglasses","Hat","Belt",
+               "Backpack","Scarf","Jacket","Jeans","Gloves","Sneakers","Sweater","Pants","T-shirt",
+               "Jewelry","Skirt", "Blouse", "Sandals", "Hoodie","Shoes"]]
 
 @app.post("/predict")
 async def predictApi(data: dict):
@@ -38,7 +43,7 @@ async def predictApi(data: dict):
     df = dataFromJson(data)
     nouvelle_ligne = df.iloc[0].tolist()
     x = df.iloc[0].tolist()
-
+    
     for i, val in enumerate(cols_cat_info):
         x[val] = encoder[i].transform([x[val]])[0]
     
@@ -64,5 +69,24 @@ async def predictApi(data: dict):
     for i in top5_indices:
         prediction[modelResult[i]] = y_pred[0][i]
     
+    
+    return {"predictions": prediction}
+
+
+@app.post("/predictknn")
+async def predictReviewApi(data: dict):
+    
+    x = data["data"]
+    x[0] = int(x[0])
+
+    for i, val in enumerate(cols_cat_info):
+        x[val] = encoder[i].transform([x[val]])[0]
+    print(x)
+    
+    predict = pipelineknn.predict([x])
+    prediction = {}
+    for i, val in enumerate(predict[0]):
+        prediction[modelResult[i]] = val
+    print(prediction)
     
     return {"predictions": prediction}

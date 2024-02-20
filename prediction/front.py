@@ -64,9 +64,10 @@ def main():
             "Payment Method": payment
         }
         # Appel de la fonction de prédiction avec les données saisies
-        prediction = predict(data)
+        prediction = predict(data)["predictions"]
         st.write("Prédiction obtenue :")
-        st.write(prediction)
+        for cle, valeur in prediction.items():
+            st.write(cle + " : " + str(valeur) + " unité achetée")
 
 # Appel de la fonction principale pour exécuter l'interface
 if __name__ == "__main__":
