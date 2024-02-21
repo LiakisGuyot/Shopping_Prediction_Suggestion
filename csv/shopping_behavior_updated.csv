@@ -1,5 +1,4 @@
 Customer ID;Age;Gender;Location;Subscription Status;Frequency of Purchases;Item Purchased;Category;Purchase Amount (USD);Size;Color;Season;Review Rating;Shipping Type;Discount Applied;Promo Code Used;Previous Purchases;Payment Method
-1;55;Male;Kentucky;Yes;Fortnightly;Blouse;Clothing;53;L;Gray;Winter;3.1;Express;Yes;Yes;14;Venmo
 2;19;Male;Maine;Yes;Fortnightly;Sweater;Clothing;64;L;Maroon;Winter;3.1;Express;Yes;Yes;2;Cash
 3;50;Male;Massachusetts;Yes;Weekly;Jeans;Clothing;73;S;Maroon;Spring;3.1;Free Shipping;Yes;Yes;23;Credit Card
 4;21;Male;Rhode Island;Yes;Weekly;Sandals;Footwear;90;M;Maroon;Spring;3.5;Next Day Air;Yes;Yes;49;PayPal
