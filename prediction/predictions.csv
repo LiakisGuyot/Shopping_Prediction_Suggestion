@@ -1,4 +1,2 @@
-18;Female;Alabama;No;Annually;Summer;2-Day Shipping;No;No;Bank Transfer;0.09;0.1;0.07;0.18;0.22;0.46;0.28;0.35;0.07;0.37;0.38;0.28;0.14;0.19;0.57;0.06;0.21;0.14;0.18;0.12;0.12;0.08;0.26;0.02;0.19
-18;Male;Alabama;No;Annually;Fall;2-Day Shipping;No;No;Bank Transfer;0.04;0.12;0.09;0.08;0.31;0.51;0.17;0.27;0.12;0.26;0.23;0.23;0.09;0.23;0.38;0.11;0.14;0.13;0.29;0.06;0.08;0.1;0.28;0.06;0.22
-18;Male;Alabama;No;Annually;Fall;2-Day Shipping;No;No;Bank Transfer;0.04;0.12;0.09;0.08;0.31;0.51;0.17;0.27;0.12;0.26;0.23;0.23;0.09;0.23;0.38;0.11;0.14;0.13;0.29;0.06;0.08;0.1;0.28;0.06;0.22
-18;Male;Alabama;No;Annually;Fall;2-Day Shipping;No;No;Bank Transfer;0.04;0.12;0.09;0.08;0.31;0.51;0.17;0.27;0.12;0.26;0.23;0.23;0.09;0.23;0.38;0.11;0.14;0.13;0.29;0.06;0.08;0.1;0.28;0.06;0.22
+Age;Genre;Location;Subscription Status;Frequency of Purchases;Season;Shipping Type;Discount Applied;Promo Code Used;Payment Method;Item 1;Item 2;Item 3
+18;Male;Alabama;No;Annually;Fall;2-Day Shipping;No;No;Bank Transfer;Boots;Gloves;Dress

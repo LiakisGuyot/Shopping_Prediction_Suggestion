@@ -29,9 +29,7 @@ else:
     # Si le fichier n'existe pas, on initialise une liste vide
     donnees = [["Age", "Genre", "Location", "Subscription Status", "Frequency of Purchases", 
                "Season", "Shipping Type", "Discount Applied", "Promo Code Used", "Payment Method",
-               "Shorts","Shirt","Socks","Coat","Dress","Boots","Handbag","Sunglasses","Hat","Belt",
-               "Backpack","Scarf","Jacket","Jeans","Gloves","Sneakers","Sweater","Pants","T-shirt",
-               "Jewelry","Skirt", "Blouse", "Sandals", "Hoodie","Shoes"]]
+               "Item 1","Item 2","Item 3"]]
 
 @app.post("/predict")
 async def predictApi(data: dict):
@@ -49,26 +47,23 @@ async def predictApi(data: dict):
     
     y_pred = predict(pipeline, [x])
     
-    # Ajouter une nouvelle ligne à la liste de données
-    for i in y_pred[0]:
-        nouvelle_ligne.append(i)
-    donnees.append(nouvelle_ligne)
-    
     # Triez la liste en fonction de ses éléments et récupérez les indices correspondants
     indices_tries = sorted(range(len(y_pred[0])), key=lambda i: y_pred[0][i], reverse=True)
 
-    # Récupérez les 5 premiers indices
-    top5_indices = indices_tries[:5]
-
+    # Récupérez les 3 premiers indices
+    top3_indices = indices_tries[:3]
+        
+    prediction = {}
+    for i in top3_indices:
+        prediction[modelResult[i]] = y_pred[0][i]
+        nouvelle_ligne.append(modelResult[i])
+        
+    donnees.append(nouvelle_ligne)
+        
     # Sauvegarder les données dans le fichier CSV
     with open(SAVE_FILENAME, mode='w', newline='') as file:
         writer = csv.writer(file, delimiter=';')
         writer.writerows(donnees)
-        
-    prediction = {}
-    for i in top5_indices:
-        prediction[modelResult[i]] = y_pred[0][i]
-    
     
     return {"predictions": prediction}
 
