@@ -14,5 +14,8 @@ L'API écrit les résultats des prédictions dans des fichiers csv :
 ## Dashboard PowerBI
 Il est nécessaire de refaire les liens avec les différents excels pour assurer le sourcing.
 
+Les prédictions doivent pointer sur les fichiers présents dans le dossier api.
+Il faut donc que l'élément présentant la prédiction pour un nouvel utilisateur pointe sur "prediction.csv" du dossier API.
+Il faut que l'élément présentant la prédiction sur un utilisateur déjà présent dans la base de donnée pointe sur "predictionReview.csv" du dossier API.
   
 
